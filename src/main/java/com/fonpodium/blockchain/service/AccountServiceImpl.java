@@ -11,13 +11,13 @@ import com.fonpodium.blockchain.model.Account;
 import com.fonpodium.blockchain.repository.IAccountRepository;
 
 @Service
-public class AccountService {
+public class AccountServiceImpl implements IAccountService{
 
 
     private final IAccountRepository accountRepository;
 
     @Autowired
-    public AccountService(IAccountRepository repo) {
+    public AccountServiceImpl(IAccountRepository repo) {
         this.accountRepository = repo;
     }
 
