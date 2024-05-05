@@ -8,11 +8,11 @@
 		<version>3.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>basic</artifactId>
+	<groupId>com.fonpodium</groupId>
+	<artifactId>blockchain</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>basic</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Java Test</description>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
        <maven.compiler.target>17</maven.compiler.target>
@@ -27,6 +27,24 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency> -->
         
         <!-- MySQL -->
         <dependency>
@@ -34,6 +52,11 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+      		<scope>runtime</scope>
+ 		</dependency>
 
 		
 	</dependencies>
@@ -45,7 +68,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>spring_rest_docker</finalName>
+		<finalName>blockchain_team</finalName>
 	</build>
 
 </project>
