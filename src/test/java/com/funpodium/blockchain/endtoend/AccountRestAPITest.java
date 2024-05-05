@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import com.funpodium.blockchain.model.Account;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class HttpRequestTest {
+public class AccountRestAPITest {
 
     @LocalServerPort
     private int port;
