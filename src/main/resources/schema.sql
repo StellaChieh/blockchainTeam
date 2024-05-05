@@ -1,11 +1,3 @@
-CREATE TABLE IF NOT EXISTS balance (
-    user_id INT PRIMARY KEY,
-    usd_balance INT NOT NULL,
-    btc_balance INT NOT NULL,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
 CREATE TABLE IF NOT EXISTS account (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -14,12 +6,20 @@ CREATE TABLE IF NOT EXISTS account (
 );
 
 
+CREATE TABLE IF NOT EXISTS balance (
+    user_id INT PRIMARY KEY,
+    usd_balance INT NOT NULL,
+    btc_balance INT NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 CREATE TABLE IF NOT EXISTS exchange (
     exchange_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     exchange_type BOOlean NOT NULL,
-    usd_change INT NOT NULL,
     btc_change INT NOT NULL,
+    btc_price INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

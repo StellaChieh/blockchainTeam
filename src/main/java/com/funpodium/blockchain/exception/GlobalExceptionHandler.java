@@ -15,6 +15,18 @@ public class GlobalExceptionHandler {
                             .body(new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage()));
     }
 
+    @ExceptionHandler(value=AccountDoesNotExistException.class)
+    public ResponseEntity<ErrorResponse> handleAccountDoesNotExistException(AccountAlreadyExistsException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                            .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()));
+    }
+
+    @ExceptionHandler(value=BalanceNotEnoughException.class)
+    public ResponseEntity<ErrorResponse> handleBalanceNotEnoughException(BalanceNotEnoughException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleCommonException(Exception ex){
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
