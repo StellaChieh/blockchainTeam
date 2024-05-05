@@ -2,7 +2,9 @@ package com.funpodium.blockchain.endtoend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.funpodium.blockchain.model.Account;
+import com.funpodium.blockchain.model.Balance;
+import com.funpodium.blockchain.repository.IBalanceRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class AccountRestAPITest {
@@ -23,6 +27,9 @@ public class AccountRestAPITest {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
+
+    @Autowired
+    private IBalanceRepository balanceRepository;
 
     @Test
     void can_Create_New_Account_And_Get_Grant_1000() throws Exception {
@@ -34,8 +41,11 @@ public class AccountRestAPITest {
         assertNotNull(response.getBody());
         assertEquals(username, response.getBody().getUsername());
         assertEquals(email, response.getBody().getEmail());
-        assertEquals(1000, response.getBody().getUsdBalance());
-        assertEquals(0, response.getBody().getBtcBalance());
+
+        Optional<Balance> balance = balanceRepository.findById(response.getBody().getUserId());
+        assertTrue(balance.isPresent());
+        assertEquals(1000, balance.get().getUsdBalance());
+        assertEquals(0, balance.get().getBtcBalance());
         
     }
 

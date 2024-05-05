@@ -22,15 +22,8 @@ public class Account {
 
     @Column(name = "email")
     private String email;
-
-    @Column(name = "usd_balance")
-    private int usdBalance = 1000;
-
-    @Column(name = "btc_balance")
-    private int btcBalance = 0;
-
     
-    // JPA default constructor only, so the scope is protected
+    // used for JPA default constructor
     protected Account(){}
 
     
@@ -63,30 +56,10 @@ public class Account {
         this.email = email;
     }
 
-    public int getUsdBalance() {
-        return usdBalance;
-    }
-
-    public void setUsdBalance(int usdBalance) {
-        this.usdBalance = usdBalance;
-    }
-
-    public int getBtcBalance() {
-        return btcBalance;
-    }
-
-    public void setBtcBalance(int btcBalance) {
-        this.btcBalance = btcBalance;
-    }
-
 
     @Override
     public String toString() {
-        return "Account [userId=" + userId + ", username=" + username + ", email=" + email + ", usdBalance="
-                + usdBalance + ", btcBalance=" + btcBalance + "]";
+        return "Account [userId=" + userId + ", username=" + username + ", email=" + email + "]";
     }
 
-
-    
-    
 }
