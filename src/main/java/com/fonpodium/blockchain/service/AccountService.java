@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fonpodium.blockchain.exception.AccountAlreadyExistsException;
 import com.fonpodium.blockchain.model.Account;
 import com.fonpodium.blockchain.repository.IAccountRepository;
 
@@ -20,17 +21,14 @@ public class AccountService {
         this.accountRepository = repo;
     }
 
-    private boolean usernameExists(String username) {
-        return false;
-    }
-
-    public Optional<Account> createAccount(Account account) {
+    
+    public Account createAccount(Account account) {
         Optional<Account> existingAccount = accountRepository.findByUsername(account.getUsername());
         if(existingAccount.isPresent()) {
-            return Optional.empty();
+            throw new AccountAlreadyExistsException("username " + account.getUsername() + " already exists.");    
         }
-        System.out.println("Here");
-        return Optional.of(accountRepository.save(account));
+        
+        return accountRepository.save(account);
 
     }
 }
