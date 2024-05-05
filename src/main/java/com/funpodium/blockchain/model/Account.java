@@ -1,4 +1,4 @@
-package com.fonpodium.blockchain.model;
+package com.funpodium.blockchain.model;
 
 import java.math.BigDecimal;
 

@@ -1,6 +1,6 @@
-package com.fonpodium.blockchain.service;
+package com.funpodium.blockchain.service;
 
-import com.fonpodium.blockchain.model.Account;
+import com.funpodium.blockchain.model.Account;
 
 public interface IAccountService {
 

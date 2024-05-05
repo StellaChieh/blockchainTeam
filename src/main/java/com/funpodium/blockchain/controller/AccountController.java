@@ -1,10 +1,9 @@
-package com.fonpodium.blockchain.controller;
+package com.funpodium.blockchain.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fonpodium.blockchain.model.Account;
-import com.fonpodium.blockchain.service.AccountServiceImpl;
-import com.fonpodium.blockchain.service.IAccountService;
+import com.funpodium.blockchain.model.Account;
+import com.funpodium.blockchain.service.IAccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

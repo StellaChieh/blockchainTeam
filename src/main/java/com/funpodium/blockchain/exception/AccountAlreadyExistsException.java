@@ -1,4 +1,4 @@
-package com.fonpodium.blockchain.exception;
+package com.funpodium.blockchain.exception;
 
 public class AccountAlreadyExistsException extends RuntimeException{
 

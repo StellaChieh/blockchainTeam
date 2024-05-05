@@ -1,4 +1,4 @@
-package com.fonpodium.blockchain.service;
+package com.funpodium.blockchain.service;
 
 
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fonpodium.blockchain.exception.AccountAlreadyExistsException;
-import com.fonpodium.blockchain.model.Account;
-import com.fonpodium.blockchain.repository.IAccountRepository;
+import com.funpodium.blockchain.exception.AccountAlreadyExistsException;
+import com.funpodium.blockchain.model.Account;
+import com.funpodium.blockchain.repository.IAccountRepository;
 
 @Service
 public class AccountServiceImpl implements IAccountService{
