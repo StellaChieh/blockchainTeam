@@ -3,7 +3,6 @@ package com.funpodium.blockchain.endtoend;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class AccountRestAPITest {
     private TestRestTemplate testRestTemplate;
 
     @Test
-    void canCreateNewAccountAndGetGrant1000() throws Exception {
+    void can_Create_New_Account_And_Get_Grant_1000() throws Exception {
         String username = "myusername";
         String email = "username@gmail.com";
         Account newAccount = new Account(username, email);
@@ -35,8 +34,8 @@ public class AccountRestAPITest {
         assertNotNull(response.getBody());
         assertEquals(username, response.getBody().getUsername());
         assertEquals(email, response.getBody().getEmail());
-        assertEquals(BigDecimal.valueOf(1000), response.getBody().getUsdBalance());
-        assertEquals(BigDecimal.valueOf(0), response.getBody().getBtcBalance());
+        assertEquals(1000, response.getBody().getUsdBalance());
+        assertEquals(0, response.getBody().getBtcBalance());
         
     }
 

@@ -1,7 +1,5 @@
 package com.funpodium.blockchain.model;
 
-import java.math.BigDecimal;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,10 +24,10 @@ public class Account {
     private String email;
 
     @Column(name = "usd_balance")
-    private BigDecimal usdBalance = new BigDecimal(1000);
+    private int usdBalance = 1000;
 
     @Column(name = "btc_balance")
-    private BigDecimal btcBalance = new BigDecimal(0);
+    private int btcBalance = 0;
 
     
     // JPA default constructor only, so the scope is protected
@@ -65,19 +63,19 @@ public class Account {
         this.email = email;
     }
 
-    public BigDecimal getUsdBalance() {
+    public int getUsdBalance() {
         return usdBalance;
     }
 
-    public void setUsdBalance(BigDecimal usdBalance) {
+    public void setUsdBalance(int usdBalance) {
         this.usdBalance = usdBalance;
     }
 
-    public BigDecimal getBtcBalance() {
+    public int getBtcBalance() {
         return btcBalance;
     }
 
-    public void setBtcBalance(BigDecimal btcBalance) {
+    public void setBtcBalance(int btcBalance) {
         this.btcBalance = btcBalance;
     }
 

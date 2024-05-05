@@ -13,7 +13,7 @@ import com.funpodium.blockchain.repository.IAccountRepository;
 @Service
 public class AccountServiceImpl implements IAccountService{
 
-
+    
     private final IAccountRepository accountRepository;
 
     @Autowired
@@ -23,12 +23,12 @@ public class AccountServiceImpl implements IAccountService{
 
     
     public Account createAccount(Account account) {
-        Optional<Account> existingAccount = accountRepository.findByUsername(account.getUsername());
+        Optional<Account> existingAccount = this.accountRepository.findByUsername(account.getUsername());
         if(existingAccount.isPresent()) {
             throw new AccountAlreadyExistsException("username " + account.getUsername() + " already exists.");    
         }
         
-        return accountRepository.save(account);
+        return this.accountRepository.save(account);
 
     }
 }
