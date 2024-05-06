@@ -12,7 +12,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
 import com.funpodium.blockchain.exception.BalanceNotEnoughException;
 import com.funpodium.blockchain.model.BTCTransaction;
@@ -20,8 +19,6 @@ import com.funpodium.blockchain.model.Balance;
 import com.funpodium.blockchain.repository.IBalanceRepository;
 
 @SpringBootTest
-@TestPropertySource(
-  locations = "classpath:application-test.properties")
 public class BtcTransactionServiceTest {
 
     @Autowired

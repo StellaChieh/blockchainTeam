@@ -14,15 +14,12 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
 
 import com.funpodium.blockchain.model.Account;
 import com.funpodium.blockchain.model.Balance;
 import com.funpodium.blockchain.repository.IBalanceRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@TestPropertySource(
-  locations = "classpath:application-test.properties")
 public class AccountRestAPITest {
 
     @LocalServerPort
