@@ -20,6 +20,9 @@ In the test environment, the application connects to an embedded H2 database.
 mvn clean test
 ```
 
+## Documentation
+Documentation is in this [Google Doc](https://docs.google.com/document/d/1chA2Z0WbRXo5G--7tLcvVzfgAKYUMtc_XGuDYFHf6go/edit?usp=sharing)
+
 ## Contributing
 
 This project reference to the following projects:
