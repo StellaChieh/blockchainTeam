@@ -33,11 +33,9 @@ public class BTCTransaction {
 
     protected BTCTransaction(){}
 
-    public BTCTransaction(int tranctionId, int userId, int btcChange, int btcPrice) {
-        this.transactionId = tranctionId;
+    public BTCTransaction(int userId, int btcChange) {
         this.userId = userId;
         this.btcChange = btcChange;
-        this.btcPrice = btcPrice;
     }
 
     public int getTransactionId() {

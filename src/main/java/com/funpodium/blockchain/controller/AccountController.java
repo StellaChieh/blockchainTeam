@@ -22,7 +22,8 @@ public class AccountController {
     private final IAccountService accountService;
 
     private final IBalanceService balanceService;
-
+    
+    @Autowired
     public AccountController(IAccountService accountService, IBalanceService balanceService) {
         this.accountService = accountService;
         this.balanceService = balanceService;
