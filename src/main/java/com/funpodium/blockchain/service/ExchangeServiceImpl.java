@@ -62,7 +62,11 @@ public class ExchangeServiceImpl implements IExchangeService{
         balance.setBtcBalance(btcNewBalance);
         exchange.setBtcPrice(btcPrice);
         this.balanceRepository.save(balance);
-        return this.exchangeRepository.save(exchange);
+        Exchange savedExchange = this.exchangeRepository.save(exchange);
+        savedExchange.setUsdBalance(usdNewBalance);
+        savedExchange.setBtcBalance(btcNewBalance);
+        return savedExchange;
+        
     }
 
 }

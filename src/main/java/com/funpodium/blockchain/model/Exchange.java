@@ -28,6 +28,10 @@ public class Exchange {
     @Column(name="btc_price")
     private int btcPrice;
 
+    private int usdBalance;
+
+    private int btcBalance;
+
     protected Exchange(){}
 
     public Exchange(int exchangeId, int userId, boolean exchangeType, int btcChange, int btcPrice) {
@@ -78,4 +82,21 @@ public class Exchange {
         this.btcPrice = btcPrice;
     }
 
+    public int getUsdBalance() {
+        return usdBalance;
+    }
+
+    public int getBtcBalance() {
+        return btcBalance;
+    }
+
+    public void setUsdBalance(int usdBalance) {
+        this.usdBalance = usdBalance;
+    }
+
+    public void setBtcBalance(int btcBalance) {
+        this.btcBalance = btcBalance;
+    }
+
+    
 }
