@@ -9,4 +9,7 @@ import com.funpodium.blockchain.model.BTCTransaction;
 public interface IBtcTransactionRepository extends JpaRepository<BTCTransaction, Integer>{
     
     public List<BTCTransaction> findByUserId(int userId);
+
+    // return how many records are deleted
+    public long deleteByUserId(int userId);
 }

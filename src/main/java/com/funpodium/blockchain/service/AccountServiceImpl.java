@@ -12,6 +12,7 @@ import com.funpodium.blockchain.model.Account;
 import com.funpodium.blockchain.model.Balance;
 import com.funpodium.blockchain.repository.IAccountRepository;
 import com.funpodium.blockchain.repository.IBalanceRepository;
+import com.funpodium.blockchain.repository.IBtcTransactionRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -21,12 +22,14 @@ public class AccountServiceImpl implements IAccountService{
     
     private final IAccountRepository accountRepository;
     private final IBalanceRepository balanceRepository;
+    private final IBtcTransactionRepository btcTransactionRepository;
 
     @Autowired
     public AccountServiceImpl(IAccountRepository accountRepository,
-        IBalanceRepository balanceRepository) {
+        IBalanceRepository balanceRepository, IBtcTransactionRepository btcTransactionRepository) {
         this.accountRepository = accountRepository;
         this.balanceRepository = balanceRepository;
+        this.btcTransactionRepository = btcTransactionRepository;
     }
 
     
@@ -44,13 +47,14 @@ public class AccountServiceImpl implements IAccountService{
 
     @Override
     @Transactional
-    public Account deleteAccount(Account account) {
-        Optional<Account> existingAccountOpt = this.accountRepository.findById(account.getUserId());
+    public void deleteAccount(int userId) {
+        Optional<Account> existingAccountOpt = this.accountRepository.findById(userId);
         if(existingAccountOpt.isEmpty()) {
-            throw new AccountDoesNotExistException("userId " + account.getUserId() + " does not exists."); 
+            throw new AccountDoesNotExistException("userId " + userId + " does not exists."); 
         }
         Account existingAccount = existingAccountOpt.get();
         this.accountRepository.delete(existingAccount);
-        return null;
+        this.balanceRepository.deleteById(userId);
+        this.btcTransactionRepository.deleteByUserId(userId);
     }
 }

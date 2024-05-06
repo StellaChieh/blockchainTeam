@@ -6,5 +6,5 @@ public interface IAccountService {
 
     public Account createAccount(Account account);
 
-    public Account deleteAccount(Account account);
+    public void deleteAccount(int userId);
 }

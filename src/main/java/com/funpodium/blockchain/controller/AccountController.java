@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.funpodium.blockchain.model.Account;
 import com.funpodium.blockchain.service.IAccountService;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +38,9 @@ public class AccountController {
 	}
     
     @DeleteMapping("/accounts/{userId}")
-    public ResponseEntity<Account> deleteAccount(@PathVariable String userId) {
-        
-        // TODO
-        return null;
+    public ResponseEntity<Map<String, String>> deleteAccount(@PathVariable String userId) {
+        this.accountService.deleteAccount(Integer.valueOf(userId));
+        return new ResponseEntity<>(Collections.singletonMap("message", "Account " + userId + " is been deleted.")
+                    , HttpStatus.OK);
     }
 }
