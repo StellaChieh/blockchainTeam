@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value=AccountDoesNotExistException.class)
-    public ResponseEntity<ErrorResponse> handleAccountDoesNotExistException(AccountAlreadyExistsException ex){
+    public ResponseEntity<ErrorResponse> handleAccountDoesNotExistException(AccountDoesNotExistException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                             .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()));
     }
