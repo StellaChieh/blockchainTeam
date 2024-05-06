@@ -13,6 +13,8 @@ import com.funpodium.blockchain.model.Exchange;
 import com.funpodium.blockchain.repository.IBalanceRepository;
 import com.funpodium.blockchain.repository.IExchangeRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ExchangeServiceImpl implements IExchangeService{
 
@@ -32,6 +34,7 @@ public class ExchangeServiceImpl implements IExchangeService{
     }
 
     @Override
+    @Transactional
     public Exchange createExchange(Exchange exchange, LocalDateTime curTime) {
         Optional<Balance> balanceOpt = this.balanceRepository.findByUserId(exchange.getUserId());
         if(balanceOpt.isEmpty()) {
