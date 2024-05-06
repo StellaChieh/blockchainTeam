@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS btc_transaction (
     user_id INT NOT NULL,
     btc_change INT NOT NULL,
     btc_price INT NOT NULL,
+    usd_balance INT NOT NULL,
+    btc_balance INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -25,8 +25,10 @@ public class BTCTransaction {
     @Column(name="btc_price")
     private int btcPrice;
 
+    @Column(name="usd_balance")
     private int usdBalance;
 
+    @Column(name="btc_balance")
     private int btcBalance;
 
     protected BTCTransaction(){}
