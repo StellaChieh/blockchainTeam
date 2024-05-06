@@ -1,6 +1,7 @@
 package com.funpodium.blockchain.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,11 @@ public class BtcTransactionServiceImpl implements IBtcTransactionService{
         savedExchange.setBtcBalance(btcNewBalance);
         return savedExchange;
         
+    }
+
+    @Override
+    public List<BTCTransaction> getBtcTransactionHistory(int userId) {
+        return this.btcTransactionRepository.findByUserId(userId);
     }
 
 }

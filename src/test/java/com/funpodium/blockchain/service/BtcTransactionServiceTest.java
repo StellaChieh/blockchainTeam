@@ -4,8 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,6 +114,51 @@ public class BtcTransactionServiceTest {
 
         assertThrowsExactly( BalanceNotEnoughException.class, 
             () -> this.btcTransactionService.createBtcTransaction(btcTransaction, LocalDateTime.now()));
+    }
+
+    @Test
+    void user_can_see_btc_transaction_history() {
+        // save old balance
+        int userId = 5;
+        int oldUsdBalance = 1000;
+        int oldBtcBalance = 3;
+        Balance oldBalance = new Balance(userId, oldUsdBalance, oldBtcBalance);
+        this.balanceRepository.save(oldBalance);
+
+        // buy btc
+        int btcChange1 = 2;
+        BTCTransaction btcTransaction1 = new BTCTransaction(userId, btcChange1);
+        LocalDateTime curTime1 = LocalDateTime.now();
+        BTCTransaction proceedBtcTransaction1 = this.btcTransactionService.createBtcTransaction(btcTransaction1, curTime1);
+
+        // sell btc
+        int btcChange2 = -2;
+        BTCTransaction btcTransaction2 = new BTCTransaction(userId, btcChange2);
+        LocalDateTime curTime2 = LocalDateTime.now();
+        BTCTransaction proceedBtcTransaction2 = this.btcTransactionService.createBtcTransaction(btcTransaction2, curTime2);
+
+        List<BTCTransaction> history = this.btcTransactionService.getBtcTransactionHistory(userId);
+        assertEquals(2, history.size());
+        
+        // assert buy transaction
+        BTCTransaction b1 = history.get(0);
+        assertNotEquals(0, b1.getTransactionId());
+        assertEquals(userId, b1.getUserId());
+        assertEquals(btcChange1, b1.getBtcChange());
+        assertEquals(this.quoteMachine.quote(curTime1), b1.getBtcPrice());
+        assertEquals(proceedBtcTransaction1.getUsdBalance(), b1.getUsdBalance());
+        assertEquals(proceedBtcTransaction1.getBtcBalance(), b1.getBtcBalance());
+
+        // assert sell transaction
+        BTCTransaction b2 = history.get(1);
+        assertNotEquals(0, b2.getTransactionId());
+        assertEquals(userId, b2.getUserId());
+        assertEquals(btcChange2, b2.getBtcChange());
+        assertEquals(this.quoteMachine.quote(curTime2), b2.getBtcPrice());
+        assertEquals(proceedBtcTransaction2.getUsdBalance(), b2.getUsdBalance());
+        assertEquals(proceedBtcTransaction2.getBtcBalance(), b2.getBtcBalance());
+        assertEquals(3, b2.getBtcBalance());
+        assertTrue(b2.getUsdBalance() > 0);
     }
 
 }
