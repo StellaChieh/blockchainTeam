@@ -2,8 +2,8 @@ package com.funpodium.blockchain.controller;
 
 import java.time.LocalDateTime;
 
-import com.funpodium.blockchain.service.IExchangeService;
-import com.funpodium.blockchain.model.Exchange;
+import com.funpodium.blockchain.service.IBtcTransactionService;
+import com.funpodium.blockchain.model.BTCTransaction;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/v1")
 public class BTCController {
 
-    private final IExchangeService exchangeService;
+    private final IBtcTransactionService btcTransactionService;
 
     @Autowired
-    public BTCController(IExchangeService exchangeService) {
-        this.exchangeService = exchangeService;
+    public BTCController(IBtcTransactionService btcTransactionService) {
+        this.btcTransactionService = btcTransactionService;
     }
 
     @PostMapping("/btcs")
-    public ResponseEntity<Exchange> exchangeBTC(@RequestBody Exchange exchange) {
-        Exchange proceedExchange = this.exchangeService.createExchange(exchange, LocalDateTime.now());
+    public ResponseEntity<BTCTransaction> exchangeBTC(@RequestBody BTCTransaction btcTransaction) {
+        BTCTransaction proceedTransaction = this.btcTransactionService.createBtcTransaction(btcTransaction, LocalDateTime.now());
         
-        return new ResponseEntity<>(proceedExchange, HttpStatus.CREATED);
+        return new ResponseEntity<>(proceedTransaction, HttpStatus.CREATED);
     }
     
     

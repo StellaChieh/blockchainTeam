@@ -14,10 +14,9 @@ CREATE TABLE IF NOT EXISTS balance (
 );
 
 
-CREATE TABLE IF NOT EXISTS exchange (
-    exchange_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS btc_transaction (
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    exchange_type BOOlean NOT NULL,
     btc_change INT NOT NULL,
     btc_price INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

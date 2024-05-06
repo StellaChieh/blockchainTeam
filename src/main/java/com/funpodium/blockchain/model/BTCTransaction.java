@@ -8,19 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="exchange")
-public class Exchange {
+@Table(name="btc_transaction")
+public class BTCTransaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="exchange_id")
-    private int exchangeId;
-
+    @Column(name="transaction_id")
+    private int transactionId;
+    
     @Column(name="user_id")
     private int userId;
-
-    @Column(name="exchange_type")
-    private boolean exchangeType;
 
     @Column(name="btc_change")
     private int btcChange;
@@ -32,26 +29,21 @@ public class Exchange {
 
     private int btcBalance;
 
-    protected Exchange(){}
+    protected BTCTransaction(){}
 
-    public Exchange(int exchangeId, int userId, boolean exchangeType, int btcChange, int btcPrice) {
-        this.exchangeId = exchangeId;
+    public BTCTransaction(int tranctionId, int userId, int btcChange, int btcPrice) {
+        this.transactionId = tranctionId;
         this.userId = userId;
-        this.exchangeType = exchangeType;
         this.btcChange = btcChange;
         this.btcPrice = btcPrice;
     }
 
-    public int getExchangeId() {
-        return exchangeId;
+    public int getTransactionId() {
+        return transactionId;
     }
 
     public int getUserId() {
         return userId;
-    }
-
-    public boolean isExchangeType() {
-        return exchangeType;
     }
 
     public int getBtcChange() {
@@ -62,16 +54,12 @@ public class Exchange {
         return btcPrice;
     }
 
-    public void setExchangeId(int exchangeId) {
-        this.exchangeId = exchangeId;
+    public void setTransactionId(int exchangeId) {
+        this.transactionId = exchangeId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public void setExchangeType(boolean exchangeType) {
-        this.exchangeType = exchangeType;
     }
 
     public void setBtcChange(int btcChange) {

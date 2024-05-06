@@ -9,63 +9,65 @@ import org.springframework.stereotype.Service;
 import com.funpodium.blockchain.exception.AccountDoesNotExistException;
 import com.funpodium.blockchain.exception.BalanceNotEnoughException;
 import com.funpodium.blockchain.model.Balance;
-import com.funpodium.blockchain.model.Exchange;
+import com.funpodium.blockchain.model.BTCTransaction;
 import com.funpodium.blockchain.repository.IBalanceRepository;
-import com.funpodium.blockchain.repository.IExchangeRepository;
+import com.funpodium.blockchain.repository.IBtcTransactionRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
-public class ExchangeServiceImpl implements IExchangeService{
+public class BtcTransactionServiceImpl implements IBtcTransactionService{
 
     private IBalanceRepository balanceRepository;
 
-    private IExchangeRepository exchangeRepository;
+    private IBtcTransactionRepository btcTransactionRepository;
 
     private IQuoteMachine quoteMachine;
 
     
     @Autowired
-    public ExchangeServiceImpl(IBalanceRepository balanceRepository, IExchangeRepository exchangeRepository,
+    public BtcTransactionServiceImpl(IBalanceRepository balanceRepository, IBtcTransactionRepository btcTransactionRepository,
         IQuoteMachine quoteMachine) {
         this.balanceRepository = balanceRepository;
-        this.exchangeRepository = exchangeRepository;
+        this.btcTransactionRepository = btcTransactionRepository;
         this.quoteMachine = quoteMachine;
     }
 
     @Override
     @Transactional
-    public Exchange createExchange(Exchange exchange, LocalDateTime curTime) {
-        Optional<Balance> balanceOpt = this.balanceRepository.findByUserId(exchange.getUserId());
+    public BTCTransaction createBtcTransaction(BTCTransaction btcTransaction, LocalDateTime curTime) {
+        Optional<Balance> balanceOpt = this.balanceRepository.findByUserId(btcTransaction.getUserId());
         if(balanceOpt.isEmpty()) {
-            throw new AccountDoesNotExistException("userId " + exchange.getUserId() + " does not exists."); 
+            throw new AccountDoesNotExistException("userId " + btcTransaction.getUserId() + " does not exists."); 
         }
         Balance balance = balanceOpt.get();
         int usdNewBalance = 0;
         int btcNewBalance = 0;
         int btcPrice = this.quoteMachine.quote(curTime);
-        if(exchange.isExchangeType()) { // buy BTC        
-            int usdNeeded = btcPrice * exchange.getBtcChange();
+        if(btcTransaction.getBtcChange() > 0) { // buy BTC        
+            int usdNeeded = btcPrice * btcTransaction.getBtcChange();
             if(usdNeeded > balance.getUsdBalance()) {
                 throw new BalanceNotEnoughException("USD balance is not enough."); 
             }
             usdNewBalance = balance.getUsdBalance() - usdNeeded;
-            btcNewBalance = balance.getBtcBalance() + exchange.getBtcChange();
+            btcNewBalance = balance.getBtcBalance() + btcTransaction.getBtcChange();
             
         } else { // sell BTC
+            int btcSell = -1 * btcTransaction.getBtcChange();
             int btcInAccount = balance.getBtcBalance();
-            if (btcInAccount < exchange.getBtcChange()) {
+            if (btcInAccount < btcSell) {
                 throw new BalanceNotEnoughException("BTC balance is not enough."); 
             }
-            usdNewBalance = balance.getUsdBalance() + btcPrice * exchange.getBtcChange();
-            btcNewBalance = btcInAccount - exchange.getBtcChange();
+            usdNewBalance = balance.getUsdBalance() + btcPrice * btcSell;
+            btcNewBalance = btcInAccount - btcSell;
         }
 
         balance.setUsdBalance(usdNewBalance);
         balance.setBtcBalance(btcNewBalance);
-        exchange.setBtcPrice(btcPrice);
         this.balanceRepository.save(balance);
-        Exchange savedExchange = this.exchangeRepository.save(exchange);
+        
+        btcTransaction.setBtcPrice(btcPrice);
+        BTCTransaction savedExchange = this.btcTransactionRepository.save(btcTransaction);
         savedExchange.setUsdBalance(usdNewBalance);
         savedExchange.setBtcBalance(btcNewBalance);
         return savedExchange;
