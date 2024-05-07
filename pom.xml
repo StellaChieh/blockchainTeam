@@ -11,7 +11,7 @@
 	<groupId>com.fonpodium</groupId>
 	<artifactId>blockchain</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>basic</name>
+	<name>fonpodium-blockchain</name>
 	<description>Java Test</description>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
@@ -40,6 +40,12 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
         
         <!-- MySQL -->
         <dependency>

@@ -6,9 +6,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="btc_transaction")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class BTCTransaction {
 
     @Id
@@ -31,59 +41,10 @@ public class BTCTransaction {
     @Column(name="btc_balance")
     private int btcBalance;
 
-    protected BTCTransaction(){}
-
     public BTCTransaction(int userId, int btcChange) {
         this.userId = userId;
         this.btcChange = btcChange;
     }
 
-    public int getTransactionId() {
-        return transactionId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public int getBtcChange() {
-        return btcChange;
-    }
-
-    public int getBtcPrice() {
-        return btcPrice;
-    }
-
-    public void setTransactionId(int exchangeId) {
-        this.transactionId = exchangeId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setBtcChange(int btcChange) {
-        this.btcChange = btcChange;
-    }
-
-    public void setBtcPrice(int btcPrice) {
-        this.btcPrice = btcPrice;
-    }
-
-    public int getUsdBalance() {
-        return usdBalance;
-    }
-
-    public int getBtcBalance() {
-        return btcBalance;
-    }
-
-    public void setUsdBalance(int usdBalance) {
-        this.usdBalance = usdBalance;
-    }
-
-    public void setBtcBalance(int btcBalance) {
-        this.btcBalance = btcBalance;
-    }
 
 }
