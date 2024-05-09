@@ -32,6 +32,8 @@ public class AccountServiceImpl implements IAccountService{
         this.btcTransactionRepository = btcTransactionRepository;
     }
 
+    @Override
+    @Transactional
     public Account createAccount(Account account) {
         Optional<Account> existingAccount = this.accountRepository.findByUsername(account.getUsername());
         if(existingAccount.isPresent()) {
